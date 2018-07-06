@@ -1,0 +1,22 @@
+version: '2'
+services: 
+  node: 
+    image: api-brewermap
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - api-brewermap-network
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - api-brewermap-network
+networks:
+  api-brewermap-network:
+    driver: bridge
